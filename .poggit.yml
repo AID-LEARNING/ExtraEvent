@@ -1,6 +1,7 @@
 ---
 branches:
   - master
+
 projects:
   libEventAttribute:
     path: ""
