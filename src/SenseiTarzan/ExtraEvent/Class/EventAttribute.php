@@ -3,6 +3,7 @@
 namespace SenseiTarzan\ExtraEvent\Class;
 
 use Attribute;
+use pocketmine\event\EventPriority;
 
 #[Attribute(Attribute::TARGET_METHOD)]
 class EventAttribute{
