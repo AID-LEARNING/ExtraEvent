@@ -4,6 +4,7 @@ namespace SenseiTarzan\ExtraEvent\Component;
 
 use pocketmine\event\Event;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\TextFormat;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
@@ -36,7 +37,7 @@ class EventLoader
             $eventType = self::getEventsHandledBy($method);
             if ($eventType === null) continue;
             $plugin->getServer()->getPluginManager()->registerEvent($eventType, $method->getClosure($instance), $attribute->getPriority(), $plugin, $attribute->isHandleCancelled());
-
+            $plugin->getLogger()->debug("[libEventAttribute]the ". TextFormat::GOLD . $method->getName() . TextFormat::WHITE.  "($eventType) method of ". $reflectClass->getName() . " has been initialized");
         }
         unset($instance);
     }
