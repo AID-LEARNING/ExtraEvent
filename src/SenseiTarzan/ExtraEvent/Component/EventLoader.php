@@ -29,9 +29,9 @@ class EventLoader
             return;
         }
         foreach ($reflectClass->getMethods() as $method) {
-            $attributes = $method->getAttributes(EventAttribute::class);
+            $attributes = $method->getAttributes($eventClass = EventAttribute::class);
             if (empty($attributes)) continue;
-            $attribute = array_filter($attributes, fn(Attribute $attribute) => $attribute instanceof EventAttribute);
+            $attribute = array_filter($attributes, fn(ReflectionAttribute $attribute) => $attribute->getName() === $eventClass);
             $attribute = ($attribute[array_key_first($attribute)] ?? null)?->newInstance();
             if (!($attribute instanceof EventAttribute)) continue;
             $eventType = self::getEventsHandledBy($method);
