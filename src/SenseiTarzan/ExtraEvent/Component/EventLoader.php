@@ -2,7 +2,6 @@
 
 namespace SenseiTarzan\ExtraEvent\Component;
 
-use Attribute;
 use pocketmine\event\Event;
 use pocketmine\plugin\PluginBase;
 use ReflectionClass;
@@ -31,7 +30,7 @@ class EventLoader
         foreach ($reflectClass->getMethods() as $method) {
             $attributes = $method->getAttributes($eventClass = EventAttribute::class);
             if (empty($attributes)) continue;
-            $attribute = array_filter($attributes, fn(ReflectionAttribute $attribute) => $attribute->getName() === $eventClass);
+            $attribute = array_filter($attributes, fn(\ReflectionAttribute $attribute) => $attribute->getName() === $eventClass);
             $attribute = ($attribute[array_key_first($attribute)] ?? null)?->newInstance();
             if (!($attribute instanceof EventAttribute)) continue;
             $eventType = self::getEventsHandledBy($method);
