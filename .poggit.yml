@@ -1,6 +1,7 @@
 ---
 branches:
   - master
+  - pm5
 
 projects:
   libEventAttribute:
